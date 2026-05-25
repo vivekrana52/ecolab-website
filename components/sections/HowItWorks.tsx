@@ -74,7 +74,7 @@ export default function HowItWorks() {
               variant="fadeUp"
               delay={index * 0.15}
             >
-              <div className="flex flex-col items-center text-center relative gap-3 bg-[#F8FAFC] py-2">
+              <div className="flex flex-col items-center text-center relative gap-3 bg-[#0A0A0A] py-4">
                 {/* Number circle */}
                 <div className="relative z-10 flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#111111] border-2 border-[#2563EB] flex items-center justify-center">
                   <span className="text-xs md:text-sm font-bold text-[#2563EB]">
