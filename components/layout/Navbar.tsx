@@ -206,14 +206,14 @@ export default function Navbar() {
                       : { rotate: 0, y: 0 }
                   }
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
-                  className="block h-[2px] w-5 origin-center bg-[#111111]"
+                  className="block h-[2px] w-5 origin-center bg-white"
                 />
                 <motion.span
                   animate={
                     isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }
                   }
                   transition={{ duration: 0.15 }}
-                  className="block h-[2px] w-5 bg-[#111111]"
+                  className="block h-[2px] w-5 bg-white"
                 />
                 <motion.span
                   animate={
@@ -222,7 +222,7 @@ export default function Navbar() {
                       : { rotate: 0, y: 0 }
                   }
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
-                  className="block h-[2px] w-5 origin-center bg-[#111111]"
+                  className="block h-[2px] w-5 origin-center bg-white"
                 />
               </div>
             </button>
