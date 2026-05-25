@@ -2,26 +2,209 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ──────────────────────────────────────────────
+   CSS Custom Properties — ECOLAB Design Tokens
+   ────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core palette */
+  --color-electric-blue: #2563EB;
+  --color-electric-blue-hover: #1D4ED8;
+  --color-dark: #0e0918;
+  --color-light: #f8fafc;
+  --color-muted: #64748b;
+  --color-text-dark: #0f172a;
+
+  /* Surfaces */
+  --color-surface-dark: #111111;
+  --color-surface-dark-alt: #171717;
+  --color-border-dark: #1e1e1e;
+  --color-border-light: #e2e8f0;
+
+  /* Spacing scale */
+  --section-padding-y: 5rem;
+  --section-padding-x: 1.5rem;
+
+  /* Transition defaults */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ──────────────────────────────────────────────
+   Base Layer
+   ────────────────────────────────────────────── */
+@layer base {
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-dark text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1 {
+    @apply text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold tracking-tight md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl font-semibold tracking-tight md:text-2xl;
+  }
+
+  h5 {
+    @apply text-lg font-medium md:text-xl;
+  }
+
+  h6 {
+    @apply text-base font-medium md:text-lg;
+  }
+
+  /* Selection colors */
+  ::selection {
+    background-color: var(--color-electric-blue);
+    color: #ffffff;
+  }
+
+  ::-moz-selection {
+    background-color: var(--color-electric-blue);
+    color: #ffffff;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* ──────────────────────────────────────────────
+   Components Layer
+   ────────────────────────────────────────────── */
+@layer components {
+  /* Geometric grid pattern — subtle lines on dark bg */
+  .bg-grid-pattern {
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.03) 0px,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 60px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 0px,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 60px
+      );
+  }
+
+  /* Dot pattern background */
+  .bg-dot-pattern {
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.07) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+  }
+
+  /* Gradient text utility */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      var(--color-electric-blue) 50%,
+      #ffffff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-coral {
+    background: linear-gradient(
+      135deg,
+      var(--color-electric-blue) 0%,
+      #2563EB 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
+/* ──────────────────────────────────────────────
+   Utilities Layer
+   ────────────────────────────────────────────── */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Smooth transition helpers */
+  .transition-colors-fast {
+    transition: color var(--transition-fast),
+      background-color var(--transition-fast),
+      border-color var(--transition-fast);
   }
+
+  .transition-all-base {
+    transition: all var(--transition-base);
+  }
+
+  .transition-all-slow {
+    transition: all var(--transition-slow);
+  }
+
+  .transition-transform-base {
+    transition: transform var(--transition-base);
+  }
+
+  .transition-opacity-base {
+    transition: opacity var(--transition-base);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Custom Scrollbar — Dark Theme
+   ────────────────────────────────────────────── */
+
+/* Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #333333 var(--color-dark);
+}
+
+/* ──────────────────────────────────────────────
+   Focus Styles
+   ────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--color-electric-blue);
+  outline-offset: 2px;
 }
